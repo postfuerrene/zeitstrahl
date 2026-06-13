@@ -20,9 +20,38 @@
     <button type="button" class="tl-navbtn" data-nav data-target="epoch-1">Das Kloster<span class="yr">1234 – 1989</span></button>
     <button type="button" class="tl-navbtn" data-nav data-target="epoch-2">Aufbruch<span class="yr">1989 – 1994</span></button>
     <button type="button" class="tl-navbtn" data-nav data-target="epoch-3">IBZ &amp; Kloster heute<span class="yr">1994 – heute</span></button>
+    <select class="tl-jump" data-year-jump aria-label="Direkt zu einer Station springen">
+      <option value="">Station wählen…</option>
+      <option value="1234">1234 — Gründung</option>
+      <option value="1427">1427 — Zerstörung durch die Hussiten</option>
+      <option value="1683">1683 — Brand und Barockisierung</option>
+      <option value="1728">1728 — Der Kalvarienberg</option>
+      <option value="1838">1838 — Schule und Waisenhaus</option>
+      <option value="1897">1897 — Die große Wassersnot</option>
+      <option value="1945">1945 — Grenze mitten durch die Neiße</option>
+      <option value="1989/90">1989/90 — Die Wende</option>
+      <option value="1991">1991 — Eine Idee entsteht</option>
+      <option value="1992">1992 — Gründung der Stiftung IBZ</option>
+      <option value="1993">1993 — Erbbaurechtsvertrag</option>
+      <option value="1994">1994 — Gästehaus St. Hedwig</option>
+      <option value="1998">1998 — Gästehaus St. Franziskus</option>
+      <option value="1999">1999 — Garten der Bibelpflanzen</option>
+      <option value="2000">2000 — „ora et labora“</option>
+      <option value="2002">2002 — Haus der Familie</option>
+      <option value="2005–08">2005–08 — Hochwasserschutz</option>
+      <option value="08/2010">08/2010 — Das Jahrhunderthochwasser</option>
+      <option value="2010–17">2010–17 — Wiederaufbau</option>
+      <option value="2014">2014 — Gästehaus St. Clemens</option>
+      <option value="2016">2016 — Bundespräsident zu Gast</option>
+      <option value="2017">2017 — Obst- und Winzerfest</option>
+      <option value="2019">2019 — Amphitheater</option>
+      <option value="2022">2022 — 30 Jahre Stiftung</option>
+      <option value="Heute">Heute — Mitte Europas</option>
+    </select>
   </nav>
 
   <div class="timeline">
+    <div class="tl-progress" aria-hidden="true"><div class="tl-progress-fill" data-tl-progress></div></div>
 
     <!-- ================= EPOCHE I: DAS KLOSTER ================= -->
     <div class="epoch" id="epoch-1">
@@ -405,7 +434,7 @@
     <p>Historische Fotografien und Abbildungen aus: Michael Schlitt (Hg.), Die Zisterzienserinnenabtei Klosterstift St. Marienthal. Geschichte – Kultur – Impulse, Verlag Gunter Oettel, Görlitz/Zittau 2021. Verwendung mit freundlicher Genehmigung der Stiftung IBZ St. Marienthal.</p>
   </div>
 
-  <div class="lb" data-lightbox hidden>
+  <div class="lb" data-lightbox hidden role="dialog" aria-modal="true" aria-label="Foto-Ansicht">
     <div class="lb-inner">
       <button type="button" class="lb-close" data-lb-close aria-label="Schließen">&times;</button>
       <div class="lb-frame" data-lb-frame>

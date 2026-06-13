@@ -71,15 +71,31 @@ html, body{ margin: 0; padding: 0; }
 .tl-navbtn .yr{ font-family: var(--font-serif); font-size: 12.5px; color: var(--ibz-light); }
 .tl-navbtn:hover{ border-color: var(--ibz-rot); color: var(--ibz-rot); }
 .tl-navbtn:hover .yr{ color: var(--ibz-rot); }
+.tl-navbtn:active{ transform: scale(0.96); }
 .tl-navbtn.is-on{ background: var(--ibz-rot); border-color: var(--ibz-rot); color: #fff; }
 .tl-navbtn.is-on .yr{ color: rgba(255,255,255,0.7); }
 
+.tl-jump{
+  appearance: none; border: 1px solid rgba(5,58,82,0.16); background: var(--ibz-weiss);
+  font-family: var(--font-sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.02em; color: var(--ibz-mid);
+  padding: 7px 14px; border-radius: 999px; cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+.tl-jump:hover{ border-color: var(--ibz-rot); color: var(--ibz-rot); }
+.tl-jump:active{ transform: scale(0.96); }
+
 /* ---------- Timeline spine ---------- */
 .timeline{ position: relative; max-width: var(--maxw); margin: 0 auto; padding: 8px 0 0; }
-.timeline::before{
-  content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
-  width: 2px; transform: translateX(-50%);
+.tl-progress{
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+  transform: translateX(-50%); overflow: hidden;
   background: linear-gradient(to bottom, transparent 0, var(--ibz-line) 48px, var(--ibz-line) calc(100% - 120px), transparent 100%);
+}
+.tl-progress-fill{
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--ibz-rot); transform: scaleY(0); transform-origin: top;
+  transition: transform 120ms linear;
 }
 
 /* ---------- Epoch divider ---------- */
@@ -141,11 +157,15 @@ html, body{ margin: 0; padding: 0; }
   grid-row: 1;
   position: relative; background: var(--ibz-weiss);
   border: 1px solid rgba(5,58,82,0.12); border-radius: 6px;
-  padding: 22px 26px; transition: border-color 220ms ease, box-shadow 220ms ease;
+  padding: 22px 26px;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
 .station.left .card{ grid-column: 1; }
 .station.right .card{ grid-column: 3; }
-.station.is-active .card{ border-color: rgba(150,18,39,0.35); box-shadow: 0 1px 0 rgba(150,18,39,0.08); }
+.station.is-active .card{
+  border-color: rgba(150,18,39,0.35); transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(150,18,39,0.1), 0 1px 0 rgba(150,18,39,0.08);
+}
 .station .card::after{
   content: ""; position: absolute; top: 17px; width: 38px; height: 1px;
   background: var(--ibz-line); transition: background 220ms ease;
@@ -204,6 +224,16 @@ html, body{ margin: 0; padding: 0; }
   color: var(--ibz-light); margin: 9px 2px 0; font-style: italic;
 }
 
+/* Dezenter Platzhalter, solange noch kein Foto hinterlegt ist */
+.photo--pending .photo-frame{
+  aspect-ratio: auto; flex-direction: row; justify-content: flex-start;
+  gap: 8px; padding: 10px 12px; background: none;
+  border: 1px dashed var(--ibz-line);
+}
+.photo--pending .photo-frame .cam{ width: 16px; height: 16px; opacity: 0.45; }
+.photo--pending .photo-badge{ display: none; }
+.photo--pending:hover .photo-frame{ border-color: var(--ibz-rot); filter: none; }
+
 /* ---------- Footnote ---------- */
 .tl-foot{
   max-width: 760px; margin: clamp(40px,6vw,72px) auto 0;
@@ -260,20 +290,27 @@ html, body{ margin: 0; padding: 0; }
 
 /* ---------- Mobile ---------- */
 @media (max-width: 760px){
-  .timeline::before{ left: 21px; transform: none;
+  .tl-progress{ left: 21px; transform: none;
     background: linear-gradient(to bottom, transparent 0, var(--ibz-line) 30px, var(--ibz-line) calc(100% - 90px), transparent 100%); }
   .station{ display: block; position: relative; padding-left: 54px; margin: 22px 0; }
   .station .node{ position: absolute; left: 14px; top: 8px; margin: 0; }
   .station .card{ grid-column: auto !important; padding: 20px 20px; }
   .station .card::after{ display: none; }
+  .station.is-active .card{ transform: none; }
+  .station .year{
+    position: sticky; top: 58px; z-index: 5;
+    display: inline-block; background: var(--ibz-weiss);
+    padding: 2px 8px 2px 0; margin: 0 0 8px -2px;
+  }
   .tl-bridge{ padding: 8px 16px; }
   .epoch-head{ padding: 16px 0; }
   .lb-close{ top: 6px; right: 6px; }
   .lb-inner{ padding: 14px; }
+  .tl-jump{ width: 100%; max-width: 280px; }
 }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce){
   .station .node, .station .card, .station .year, .station .card::after,
-  .photo-frame, .lb{ transition: none; animation: none; }
+  .photo-frame, .lb, .tl-progress-fill, .tl-navbtn, .tl-jump{ transition: none; animation: none; }
 }
