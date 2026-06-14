@@ -103,6 +103,7 @@ html, body{ margin: 0; padding: 0; }
   position: relative; z-index: 4; text-align: center;
   margin: clamp(32px,5vw,64px) auto clamp(28px,4vw,44px);
   padding: 22px 0;
+  background: var(--ibz-weiss);
 }
 .epoch-head .signet{ width: 46px; height: 46px; object-fit: contain; display: block; margin: 0 auto 14px; }
 .epoch-head .ep-label{
